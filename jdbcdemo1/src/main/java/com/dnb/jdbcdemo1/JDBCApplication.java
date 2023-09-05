@@ -28,6 +28,8 @@ public class JDBCApplication {
     	case 1:
     		
         Account account = new Account();
+        
+        
         System.out.println("Enter acc id: ");  account.setAccountId(sc.next());
         System.out.println("Enetr name :");  account.setAccountHolderName(sc.next());
         System.out.println("Acc type: "); account.setAccountType(sc.next());
