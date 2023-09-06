@@ -1,6 +1,8 @@
 package com.dnb.jdbcdemo1;
 
+import com.dnb.jdbcdemo1.config.Config;
 import com.dnb.jdbcdemo1.dto.Account;
+import com.dnb.jdbcdemo1.service.AccountService;
 import com.dnb.jdbcdemo1.service.AccountServiceImpl;
 
 import java.time.LocalDate;
@@ -10,9 +12,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class JDBCApplication {
-    public static void main(String[] args) {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+public class JDBCApplication {
+//	private static AccountService accountService
+	
+    public static void main(String[] args) {
+    	ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Config.class);
+        AccountService accountService = applicationContext.getBean(AccountService.class);
     	Scanner sc= new Scanner(System.in);
     	int choice;
     	do {
@@ -41,13 +50,13 @@ public class JDBCApplication {
         LocalDate dob = LocalDate.parse(date,formatter);
         account.setDob(dob);
         account.setAccountStatus(true);
-        AccountServiceImpl.getInstance().createAccount(account);
+        accountService.createAccount(account);
     	
     	break;
     	case 2:
     		System.out.println("Enter the account Id");
     		String accountId = sc.next();
-    		Optional<Account> result = AccountServiceImpl.getInstance().getAccountById(accountId);
+    		Optional<Account> result = accountService.getAccountById(accountId);
 
     		if (result.isPresent()) {
     		Account account1 = result.get();
@@ -60,11 +69,11 @@ public class JDBCApplication {
     	case 3:
     		System.out.println("Enter the account Id");
     		String accountId1 = sc.next();
-    		boolean ans = AccountServiceImpl.getInstance().deleteAccount(accountId1);
+    		boolean ans = accountService.deleteAccount(accountId1);
     		System.out.println(ans);
     		break;
     	case 4:
-    		List<Account> la = AccountServiceImpl.getInstance().getAllAccounts();
+    		List<Account> la = accountService.getAllAccounts();
     		for(Account ex:la)
     		{
     			System.out.println(ex.getAccountId()+" "+ ex.getDob());

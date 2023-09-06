@@ -7,41 +7,45 @@ import com.dnb.jdbcdemo1.repo.AccountRepositoryImpl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AccountServiceImpl implements AccountService {
-
-	private AccountServiceImpl(){
+	public AccountServiceImpl(){
 
     }
+	@Autowired
+	public AccountRepository accountRepository;
 
-    private static AccountService accountService = null;
-
-    public static AccountService getInstance(){
-
-        synchronized (AccountServiceImpl.class){
-            if(accountService == null) {
-                accountService = new AccountServiceImpl();
-            }
-        }
-
-        return accountService;
-    }
+//    private static AccountService accountService = null;
+//
+//    public static AccountService getInstance(){
+//
+//        synchronized (AccountServiceImpl.class){
+//            if(accountService == null) {
+//                accountService = new AccountServiceImpl();
+//            }
+//        }
+//
+//        return accountService;
+//    }
 
     @Override
     public Account createAccount(Account account) {
-        AccountRepository accountRepository = AccountRepositoryImpl.getInstance();
+        //AccountRepository accountRepository = AccountRepositoryImpl.getInstance();
         return accountRepository.createAccount(account);
     }
     
     @Override
     public Optional<Account> getAccountById(String accountId) {
-        AccountRepository accountRepository = AccountRepositoryImpl.getInstance();
+       // AccountRepository accountRepository = AccountRepositoryImpl.getInstance();
         return  accountRepository.getAccountById(accountId);
     }
     @Override
      public boolean deleteAccount(String accountId)
      {
-    	 AccountRepository accountRepository = AccountRepositoryImpl.getInstance();
+    	 //AccountRepository accountRepository = AccountRepositoryImpl.getInstance();
          return  accountRepository.deleteAccount(accountId);
     	 
      }
@@ -49,7 +53,7 @@ public class AccountServiceImpl implements AccountService {
      @Override
      public List<Account> getAllAccounts()
      {
-    	 AccountRepository accountRepository = AccountRepositoryImpl.getInstance();
+    	// AccountRepository accountRepository = AccountRepositoryImpl.getInstance();
          return  accountRepository.getAllAccounts();
     	 
      }
