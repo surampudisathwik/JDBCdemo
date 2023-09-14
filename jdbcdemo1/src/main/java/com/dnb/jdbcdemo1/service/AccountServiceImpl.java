@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,7 @@ public class AccountServiceImpl implements AccountService {
 
     }
 	@Autowired
-	public AccountRepository accountRepository;
+	public AccountRepository accountRepository2Impl;
 
 //    private static AccountService accountService = null;
 //
@@ -34,19 +35,19 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account createAccount(Account account) {
         //AccountRepository accountRepository = AccountRepositoryImpl.getInstance();
-        return accountRepository.createAccount(account);
+        return accountRepository2Impl.createAccount(account);
     }
     
     @Override
     public Optional<Account> getAccountById(String accountId) {
        // AccountRepository accountRepository = AccountRepositoryImpl.getInstance();
-        return  accountRepository.getAccountById(accountId);
+        return  accountRepository2Impl.getAccountById(accountId);
     }
     @Override
      public boolean deleteAccount(String accountId)
      {
     	 //AccountRepository accountRepository = AccountRepositoryImpl.getInstance();
-         return  accountRepository.deleteAccount(accountId);
+         return  accountRepository2Impl.deleteAccount(accountId);
     	 
      }
     
@@ -54,7 +55,7 @@ public class AccountServiceImpl implements AccountService {
      public List<Account> getAllAccounts()
      {
     	// AccountRepository accountRepository = AccountRepositoryImpl.getInstance();
-         return  accountRepository.getAllAccounts();
+         return  accountRepository2Impl.getAllAccounts();
     	 
      }
 

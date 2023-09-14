@@ -2,8 +2,10 @@ package com.dnb.jdbcdemo1;
 
 import com.dnb.jdbcdemo1.config.Config;
 import com.dnb.jdbcdemo1.dto.Account;
+import com.dnb.jdbcdemo1.repo.AccountRepository;
 import com.dnb.jdbcdemo1.service.AccountService;
 import com.dnb.jdbcdemo1.service.AccountServiceImpl;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,7 +23,8 @@ public class JDBCApplication {
 	
     public static void main(String[] args) {
     	ApplicationContext applicationContext = new AnnotationConfigApplicationContext(Config.class);
-        AccountService accountService = applicationContext.getBean(AccountService.class);
+        AccountService accountService = applicationContext.getBean("accountServiceImpl",AccountService.class);
+        System.out.println(accountService!=null);
     	Scanner sc= new Scanner(System.in);
     	int choice;
     	do {
